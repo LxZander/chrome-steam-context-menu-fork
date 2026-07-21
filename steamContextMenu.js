@@ -3,6 +3,7 @@ var options = {
       b_steamdb: true,
       b_steamdb_instant: false,
       b_isthereanydeal: true,
+      b_1337x: true,
       b_options: true
     };
 
@@ -28,6 +29,10 @@ function update_menus(results) {
     if (options.b_isthereanydeal) {
       create_isthereanydeal_menu();
     }
+    if (options.b_1337x) {
+      create_1337x_menu();
+    }        
+        
     if (options.b_options) {
       create_options_menu();
     }
@@ -64,6 +69,17 @@ function create_isthereanydeal_menu() {
       }
   });
 }
+
+function create_1337x_menu() {
+  chrome.contextMenus.create({
+      "title": "Search 1337x Games for '%s'",
+      "contexts": ["selection"],
+      "onclick": function (info) {
+          chrome.tabs.create({url: 'https://1337x.to/category-search/' + encodeURIComponent(info.selectionText) + '/Games/1/'});
+      }
+  });
+}
+
 
 function create_options_menu() {
   chrome.contextMenus.create({
